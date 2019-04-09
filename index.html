@@ -39,17 +39,22 @@ window.onload = function(){
 
   var oDiv = document.getElementById('div1')
     oDiv.onmouseover = function(){
-      startMove(10, 0)
+      startMove(0)
     }
     oDiv.onmouseout = function(){
-      startMove(-10, -200)
+      startMove(-200)
     }
 
   var timer = null
-  function startMove(speed, iTarget){
+  function startMove(iTarget){
     clearInterval(timer)  //每次鼠标移入都会加载定时器，用它来取消
     var oDiv = document.getElementById('div1')
     timer = setInterval(function(){
+      if(oDiv.offsetLeft > iTarget){
+        speed = -10
+      }else{
+        speed = 10
+      }
       if(oDiv.offsetLeft == iTarget){
         clearInterval(timer)
       }else{
