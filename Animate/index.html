@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Special Eeffects</title>
+  <title>Move in and out</title>
   <style>
   *{margin:0;padding:0;}
   *::before{margin:0;padding:0;}
@@ -42,7 +42,7 @@
 
   let timer = null
   function startMove(iTarget){
-    clearInterval(timer)
+    clearInterval(timer)   //清除每次鼠标移入移出都会重新生成的定时器
     timer = setInterval(function(){
       let speed = 0
       if(oDiv.offsetLeft > iTarget){
