@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>缓冲动画</title>
+  <style>
+  *{margin:0;padding:0;}
+  *::before{margin:0;padding:0;}
+  *::after{margin:0;padding:0;}
+  #div1{
+    width:200px;
+    height:200px;
+    background: red;
+    position:relative;
+    left:-200px;
+    top:0;
+    
+  }
+  #div1 span{
+    width:20px;
+    height:50px;
+    background: blue;
+    position:absolute;
+    left:200px;
+    top:75px;
+    line-height:25px;
+  }
+  </style>
+</head>
+<body>
+  <div id="div1"><span id="share">分享</span></div>
+</body>
+<script>
+  let oDiv = document.getElementById('div1')
+  oDiv.onmouseover = function(){
+    startMove(0)
+  }
+  oDiv.onmouseout = function(){
+    startMove(-200)
+  }
+
+  let timer = null
+  function startMove(iTarget){
+    clearInterval(timer)   
+    timer = setInterval(function(){
+      let speed = (iTarget - oDiv.offsetLeft)/10       //给它一个系数，来决定运动的快慢
+      speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)    //因为会出现小数点的数值，所以需要取整
+      if(oDiv.offsetLeft == iTarget){
+        clearInterval(timer)
+      }else{
+        oDiv.style.left = oDiv.offsetLeft + speed + 'px'
+      }
+    },30)
+  }
+
+</script>
+</html>
