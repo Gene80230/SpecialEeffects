@@ -29,6 +29,7 @@
 let aLi = document.getElementsByTagName('li')
 
 for(let i=0; i<aLi.length; i++){
+    aLi[i].timer = null
     aLi[i].onmouseover = function(){
         startMove(this, 400)
     }
@@ -37,19 +38,18 @@ for(let i=0; i<aLi.length; i++){
     }
 }
 
-let timer = null
+// let timer = null
 function startMove(obj, target){
-    clearInterval(timer)
-    timer = setInterval(function(){
+    clearInterval(obj.timer)
+    obj.timer = setInterval(function(){
         let speed = (target - obj.offsetWidth)/8
         speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
         if(obj.offsetWidth == target){
-            clearInterval(timer)
+            clearInterval(obj.timer)
         }else{
             obj.style.width = obj.offsetWidth + speed + 'px'
         }
     },30)
-    
 }
 </script>
 </body>
