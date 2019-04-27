@@ -11,7 +11,7 @@
         height:200px;
         float:left;
         margin:10px;
-        background:red;
+        background:#666;
         opacity:0.3;
     }
     </style>
@@ -26,6 +26,7 @@
 let oDivs = document.getElementsByTagName('div')
 
 for(let i=0;i<oDivs.length;i++){
+    oDivs[i].alpha = 30
     oDivs[i].onmouseover = function(){
         startMove(this, 100)
     }
@@ -34,23 +35,23 @@ for(let i=0;i<oDivs.length;i++){
     }
 }
 
-let alpha = 30
+// let alpha = 30
 function startMove(obj, target){
     clearInterval(obj.timer)
     obj.timer = setInterval(function(){
       let speed = 0
-      if(alpha > target){
+      if(obj.alpha > target){
             speed = -10
         }else{
             speed = 10
         }
-      if(alpha == target){
+      if(obj.alpha == target){
           clearInterval(obj.timer)
       }else{
-        alpha += speed
-        obj.style.opacity = alpha/100
+        obj.alpha += speed
+        obj.style.opacity = obj.alpha/100
       }  
-    },30)
+    },10)
 }
 </script>
 </html>
