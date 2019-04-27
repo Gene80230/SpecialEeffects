@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Change transparency</title>
+    <title>多物体透明度改变</title>
     <style>
-    #div1{
+    div{
         width:200px;
         height:200px;
+        float:left;
+        margin:10px;
         background:red;
         opacity:0.3;
     }
@@ -16,21 +18,26 @@
 </head>
 <body>
     <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <div id="div4"></div>
 </body>
 <script>
-let oDiv = document.getElementById('div1')
-oDiv.onmouseover = function(){
-    startMove(100)
-}
-oDiv.onmouseout = function(){
-    startMove(30)
+let oDivs = document.getElementsByTagName('div')
+
+for(let i=0;i<oDivs.length;i++){
+    oDivs[i].onmouseover = function(){
+        startMove(this, 100)
+    }
+    oDivs[i].onmouseout = function(){
+        startMove(this, 30)
+    }
 }
 
-let timer = null
 let alpha = 30
-function startMove(target){
-    clearInterval(timer)
-    timer = setInterval(function(){
+function startMove(obj, target){
+    clearInterval(obj.timer)
+    obj.timer = setInterval(function(){
       let speed = 0
       if(alpha > target){
             speed = -10
@@ -38,10 +45,10 @@ function startMove(target){
             speed = 10
         }
       if(alpha == target){
-          clearInterval(timer)
+          clearInterval(obj.timer)
       }else{
         alpha += speed
-        oDiv.style.opacity = alpha/100
+        obj.style.opacity = alpha/100
       }  
     },30)
 }
